@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Y2K Global - AI Systems Architecture & Consulting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #0a0f1c;
+            --secondary-bg: #141b2d;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --accent-blue: #00d4ff;
+            --accent-teal: #1dd1a1;
+            --text-primary: #ffffff;
+            --text-secondary: #b4c6d6;
+            --text-muted: #8892b0;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 15, 28, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            height: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .cooperation {
+            font-size: 1.1rem;
+            color: var(--accent-teal);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-large {
+            max-width: 100%;
+            max-height: 400px;
+            filter: drop-shadow(0 0 50px rgba(0, 212, 255, 0.3));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        /* Featured Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+        }
+
+        .project-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--accent-blue);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Supporting Projects */
+        .supporting-projects {
+            background: var(--secondary-bg);
+        }
+
+        .supporting-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .supporting-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .supporting-card:hover {
+            border-color: var(--accent-teal);
+            transform: translateY(-3px);
+        }
+
+        .supporting-card h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--accent-teal);
+        }
+
+        /* About Section */
+        .about {
+            background: var(--primary-bg);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .profile-placeholder {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 0 auto;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--accent-blue);
+        }
+
+        .about-text .title {
+            font-size: 1.3rem;
+            color: var(--accent-teal);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--secondary-bg);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        .contact-card h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card p {
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        .contact-card a:hover {
+            color: var(--accent-teal);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-bg);
+            border-top: 1px solid var(--border);
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--accent-blue);
+        }
+
+        .footer-section p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+        .project-card:nth-child(5) { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <img src="https://y2k.global/y2klogoblack.png" alt="Y2K Global" class="logo">
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>AI Systems Architecture & Consulting</h1>
+                        <p class="subtitle">Y2K Global OÜ</p>
+                        <p class="cooperation">In cooperation with KISS IT Solutions e.U.</p>
+                        <p class="hero-description">
+                            Transforming businesses through cutting-edge artificial intelligence solutions. From document intelligence to funding platforms, we architect AI systems that deliver real-world impact.
+                        </p>
+                        <div class="cta-buttons">
+                            <a href="#projects" class="btn btn-primary">
+                                <i class="fas fa-rocket"></i>
+                                View Our Work
+                            </a>
+                            <a href="#contact" class="btn btn-secondary">
+                                <i class="fas fa-envelope"></i>
+                                Get In Touch
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <img src="https://y2k.global/y2klogoblack.png" alt="Y2K Global" class="logo-large">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Featured AI Solutions</h2>
+                    <p>Production-ready AI systems driving business transformation</p>
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card fade-in">
+                        <div class="project-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Funding Cockpit</h3>
+                        <p>AI-powered funding opportunity platform that discovers, evaluates, drafts, and tracks grant applications. Streamlines the entire funding lifecycle with intelligent automation.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">AI/ML</span>
+                            <span class="tech-tag">NLP</span>
+                            <span class="tech-tag">Web Platform</span>
+                            <span class="tech-tag">Live Production</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card fade-in">
+                        <div class="project-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Cortex</h3>
+                        <p>Production-grade CPU-based LLM inference platform with OpenAI-compatible API, intelligent routing, and comprehensive admin dashboard for enterprise AI deployments.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">LLM</span>
+                            <span class="tech-tag">API</span>
+                            <span class="tech-tag">Infrastructure</span>
+                            <span class="tech-tag">Enterprise</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card fade-in">
+                        <div class="project-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>DAIMOND Platform</h3>
+                        <p>Private AI for document intelligence featuring upload capabilities, embeddings generation, vector search, and RAG chat with accurate citations for knowledge management.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Document AI</span>
+                            <span class="tech-tag">RAG</span>
+                            <span class="tech-tag">Vector DB</span>
+                            <span class="tech-tag">Private Cloud</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card fade-in">
+                        <div class="project-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h3>FIS AI</h3>
+                        <p>AI companion for Fleet Information System with natural language querying, vision-based document processing, and intelligent tool-calling agent capabilities.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Computer Vision</span>
+                            <span class="tech-tag">NL Query</span>
+                            <span class="tech-tag">Agent AI</span>
+                            <span class="tech-tag">Fleet Management</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card fade-in">
+                        <div class="project-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3>Master Project ML</h3>
+                        <p>Machine learning-powered bid creation system for logistics operations, automating complex pricing and proposal generation with intelligent decision support.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">ML</span>
+                            <span class="tech-tag">Logistics</span>
+                            <span class="tech-tag">Automation</span>
+                            <span class="tech-tag">Decision Support</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="supporting-projects">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Research & Development</h2>
+                    <p>Foundational work and specialized AI applications</p>
+                </div>
+                <div class="supporting-grid">
+                    <div class="supporting-card">
+                        <h4>Master Thesis</h4>
+                        <p>"Applicability of Machine Learning in Accounting Automation" (2020) - Academic research establishing foundations for AI in financial processes.</p>
+                    </div>
+                    <div class="supporting-card">
+                        <h4>Bookkeeping Automation</h4>
+                        <p>Multi-tenant SaaS platform with AI-powered invoice extraction and automated accounting workflows.</p>
+                    </div>
+                    <div class="supporting-card">
+                        <h4>OfferFlow AI</h4>
+                        <p>Intelligent quote and invoice automation from plain text, emails, and PDFs using advanced NLP and document processing.</p>
+                    </div>
+                    <div class="supporting-card">
+                        <h4>AccountingML</h4>
+                        <p>Specialized machine learning project focused on automating accounting processes and financial data analysis.</p>
+                    </div>
+                    <div class="supporting-card">
+                        <h4>OCR Converter</h4>
+                        <p>Optical Character Recognition system for document conversion and data extraction with high accuracy rates.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Leadership</h2>
+                    <p>Experienced AI systems architect and business leader</p>
+                </div>
+                <div class="about-content">
+                    <div class="about-image">
+                        <div class="profile-placeholder">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="about-text">
+                        <h3>Gergo Kiss, MSc</h3>
+                        <p class="title">Managing Director & AI Systems Architect</p>
+                        <p>
+                            Leading the development of cutting-edge AI solutions with deep expertise in machine learning, 
+                            natural language processing, and enterprise system architecture. With a Master's degree focused 
+                            on ML applications in accounting automation, Gergo brings both academic rigor and practical 
+                            experience to every project.
+                        </p>
+                        <p>
+                            Under his leadership, our team has successfully delivered production-grade AI systems 
+                            that transform how businesses handle documents, funding, and operational intelligence. 
+                            From research foundations to market-ready solutions, we architect AI systems that deliver 
+                            measurable business impact.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Get In Touch</h2>
+                    <p>Ready to transform your business with AI? Let's discuss your project.</p>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h4>Phone</h4>
+                        <p><a href="tel:+4314422143">+43 1 442 20 143</a></p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h4>Email</h4>
+                        <p><a href="mailto:office@y2k.global">office@y2k.global</a></p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h4>Website</h4>
+                        <p><a href="https://www.y2k.global" target="_blank">www.y2k.global</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Y2K Global OÜ</h4>
+                    <p>Sepapaja 6, 15551 Tallinn, Estonia</p>
+                    <p>Registration: 17373395</p>
+                    <p>VAT: EE102928187</p>
+                </div>
+                <div class="footer-section">
+                    <h4>KISS IT Solutions e.U.</h4>
+                    <p>Seitenstettengasse 5/37, 1010 Vienna, Austria</p>
+                    <p>Registration: FN606200x</p>
+                    <p>VAT: ATU68895724</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Partnership</h4>
+                    <p>Y2K Global OÜ operates in cooperation with KISS IT Solutions e.U. to deliver comprehensive AI solutions across European markets.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Y2K Global OÜ & KISS IT Solutions e.U. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all project cards and other animated elements
+        document.querySelectorAll('.project-card, .supporting-card, .contact-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header background opacity on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(10, 15, 28, 0.98)';
+            } else {
+                header.style.background = 'rgba(10, 15, 28, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
