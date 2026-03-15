@@ -1,6 +1,7 @@
 """
-Y2K Global AI Portfolio - DOCX Generator v4
+Y2K Global AI Portfolio - DOCX Generator v5
 Marketing-agency quality, dark theme, modern typography
+Both founders on contact page, refined spacing
 """
 import os
 import copy
@@ -673,7 +674,7 @@ except:
 # ════════════════════════════════════════
 doc.add_page_break()
 
-add_spacer(30)
+add_spacer(16)
 
 # Logo
 try:
@@ -690,16 +691,70 @@ add_spacer(10)
 add_text("Let's Build Something Intelligent Together", size=24, color=ACCENT, bold=True, align='center', space_after=4)
 add_accent_line()
 add_spacer(6)
-add_text("Get in touch for a free initial consultation.", size=13, color=TEXT_COL, align='center', space_after=24)
+add_text("Get in touch for a free initial consultation.", size=13, color=TEXT_COL, align='center', space_after=12)
 
-# Signature block
+# Founders signature block — two columns
+add_spacer(4)
+table = doc.add_table(rows=1, cols=2)
+table.alignment = WD_TABLE_ALIGNMENT.CENTER
+
+# Gergo
+left = table.rows[0].cells[0]
+shade_cell(left, PANEL)
+p = left.paragraphs[0]
+p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+run = p.add_run("Gergo Kiss, MSc")
+run.font.size = Pt(14)
+run.font.color.rgb = rgb(WHITE)
+run.font.bold = True
+run.font.name = 'Calibri'
+p2 = left.add_paragraph()
+p2.alignment = WD_ALIGN_PARAGRAPH.CENTER
+run2 = p2.add_run("Managing Director  ·  AI Systems Architect")
+run2.font.size = Pt(10)
+run2.font.color.rgb = rgb(ACCENT)
+run2.font.name = 'Calibri'
+p3 = left.add_paragraph()
+p3.alignment = WD_ALIGN_PARAGRAPH.CENTER
+p3.paragraph_format.space_before = Pt(4)
+run3 = p3.add_run("gergo.kiss@y2k.global")
+run3.font.size = Pt(9.5)
+run3.font.color.rgb = rgb(DIM_COL)
+run3.font.name = 'Calibri'
+pad_cell(left, 140, 120, 140, 120)
+
+# Rami
+right = table.rows[0].cells[1]
+shade_cell(right, PANEL)
+p = right.paragraphs[0]
+p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+run = p.add_run("Ing. Ramazan Yildirim")
+run.font.size = Pt(14)
+run.font.color.rgb = rgb(WHITE)
+run.font.bold = True
+run.font.name = 'Calibri'
+p2 = right.add_paragraph()
+p2.alignment = WD_ALIGN_PARAGRAPH.CENTER
+run2 = p2.add_run("Managing Director  ·  AI Solutions Engineer")
+run2.font.size = Pt(10)
+run2.font.color.rgb = rgb(ACCENT)
+run2.font.name = 'Calibri'
+p3 = right.add_paragraph()
+p3.alignment = WD_ALIGN_PARAGRAPH.CENTER
+p3.paragraph_format.space_before = Pt(4)
+run3 = p3.add_run("ramazan.yildirim@y2k.global")
+run3.font.size = Pt(9.5)
+run3.font.color.rgb = rgb(DIM_COL)
+run3.font.name = 'Calibri'
+pad_cell(right, 140, 120, 140, 120)
+
+remove_table_borders(table)
+
 add_spacer(8)
-add_text("Gergo Kiss, MSc", size=15, color=WHITE, bold=True, align='center', space_after=2)
-add_text("Managing Director  ·  AI Systems Architect", size=11, color=DIM_COL, align='center', space_after=4)
-add_text("+43 1 442 20 143  ·  office@y2k.global  ·  www.y2k.global", size=10, color=MUTED_COL, align='center', space_after=20)
+add_text("+43 1 442 20 143  ·  office@y2k.global  ·  www.y2k.global", size=11, color=TEXT_COL, align='center', space_after=14)
 
 add_muted_line()
-add_spacer(8)
+add_spacer(6)
 
 # Company details - two column
 table = doc.add_table(rows=3, cols=2)
@@ -716,9 +771,7 @@ for i, row_data in enumerate(info):
         cell = table.rows[i].cells[j]
         shade_cell(cell, DARK)
         p = cell.paragraphs[0]
-        if j == 0:
-            pass
-        else:
+        if j == 1:
             p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
         for line_idx, line in enumerate(text.split('\n')):
             if line_idx > 0:
