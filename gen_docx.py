@@ -355,11 +355,11 @@ borders = parse_xml(
 )
 tblPr.append(borders)
 
-add_spacer(12)
+doc.add_page_break()
+add_spacer(4)
 
 # How We Work
-add_text("How We Work", size=16, color=ACCENT, bold=True, space_after=4)
-add_muted_line()
+add_section_title("How We Work", 26)
 add_spacer(6)
 
 phases = [
@@ -509,8 +509,8 @@ for idx, (tag, title, challenge, solution, results, techs) in enumerate(cases):
     add_spacer(2)
 
     # Case study header
-    add_text(f"Case Study {idx+1:02d} / {total:02d}", size=9, color=MUTED_COL, space_after=2)
-    add_text(title, size=22, color=WHITE, bold=True, space_after=2)
+    add_text(f"Case Study {idx+1:02d} / {total:02d}", size=10, color=MUTED_COL, space_after=2)
+    add_text(title, size=26, color=WHITE, bold=True, space_after=2)
     add_multirun([(tag, 11, ACCENT, False, True)], space_after=4)
     add_accent_line()
     add_spacer(6)
@@ -537,7 +537,7 @@ for idx, (tag, title, challenge, solution, results, techs) in enumerate(cases):
     p2.paragraph_format.space_after = Pt(12)
     p2.paragraph_format.line_spacing = 1.25
     run2 = p2.add_run(challenge)
-    run2.font.size = Pt(10)
+    run2.font.size = Pt(11.5)
     run2.font.color.rgb = rgb(DIM_COL)
     run2.font.name = 'Calibri'
 
@@ -553,7 +553,7 @@ for idx, (tag, title, challenge, solution, results, techs) in enumerate(cases):
     p4.paragraph_format.space_before = Pt(4)
     p4.paragraph_format.line_spacing = 1.25
     run4 = p4.add_run(solution)
-    run4.font.size = Pt(10)
+    run4.font.size = Pt(11.5)
     run4.font.color.rgb = rgb(DIM_COL)
     run4.font.name = 'Calibri'
 
@@ -581,7 +581,7 @@ for idx, (tag, title, challenge, solution, results, techs) in enumerate(cases):
         run_bullet.font.color.rgb = rgb(ACCENT_DIM)
         run_bullet.font.name = 'Calibri'
         run_text = pr.add_run(r)
-        run_text.font.size = Pt(10)
+        run_text.font.size = Pt(11)
         run_text.font.color.rgb = rgb(TEXT_COL)
         run_text.font.name = 'Calibri'
 
@@ -673,7 +673,7 @@ except:
 # ════════════════════════════════════════
 doc.add_page_break()
 
-add_spacer(30)
+add_spacer(10)
 
 # Logo
 try:
@@ -685,12 +685,12 @@ try:
 except:
     pass
 
-add_spacer(10)
+add_spacer(4)
 
-add_text("Let's Build Something Intelligent Together", size=24, color=ACCENT, bold=True, align='center', space_after=4)
+add_text("Let's Build Something Intelligent Together", size=22, color=ACCENT, bold=True, align='center', space_after=4)
 add_accent_line()
 add_spacer(6)
-add_text("Get in touch for a free initial consultation.", size=13, color=TEXT_COL, align='center', space_after=24)
+add_text("Get in touch for a free initial consultation.", size=13, color=TEXT_COL, align='center', space_after=12)
 
 # Founders signature block — two columns
 add_spacer(4)
