@@ -1,7 +1,6 @@
 """
-Y2K Global AI Portfolio - DOCX Generator v5
+Y2K Global AI Portfolio - DOCX Generator v4
 Marketing-agency quality, dark theme, modern typography
-Both founders on contact page, refined spacing
 """
 import os
 import copy
@@ -674,7 +673,7 @@ except:
 # ════════════════════════════════════════
 doc.add_page_break()
 
-add_spacer(16)
+add_spacer(30)
 
 # Logo
 try:
@@ -691,7 +690,7 @@ add_spacer(10)
 add_text("Let's Build Something Intelligent Together", size=24, color=ACCENT, bold=True, align='center', space_after=4)
 add_accent_line()
 add_spacer(6)
-add_text("Get in touch for a free initial consultation.", size=13, color=TEXT_COL, align='center', space_after=12)
+add_text("Get in touch for a free initial consultation.", size=13, color=TEXT_COL, align='center', space_after=24)
 
 # Founders signature block — two columns
 add_spacer(4)
@@ -771,7 +770,9 @@ for i, row_data in enumerate(info):
         cell = table.rows[i].cells[j]
         shade_cell(cell, DARK)
         p = cell.paragraphs[0]
-        if j == 1:
+        if j == 0:
+            pass
+        else:
             p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
         for line_idx, line in enumerate(text.split('\n')):
             if line_idx > 0:
