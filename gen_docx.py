@@ -673,24 +673,24 @@ except:
 # ════════════════════════════════════════
 doc.add_page_break()
 
-add_spacer(10)
+add_spacer(6)
 
 # Logo
 try:
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.paragraph_format.space_after = Pt(16)
+    p.paragraph_format.space_after = Pt(8)
     run = p.add_run()
-    run.add_picture(LOGO_W, width=Cm(4.5))
+    run.add_picture(LOGO_W, width=Cm(3))
 except:
     pass
 
 add_spacer(4)
 
-add_text("Let's Build Something Intelligent Together", size=22, color=ACCENT, bold=True, align='center', space_after=4)
+add_text("Empowering individuals and organizations of all sizes with accessible AI-driven solutions to transform how they live, work, and thrive.", size=14, color=ACCENT, bold=False, italic=True, align='center', space_after=6)
 add_accent_line()
-add_spacer(6)
-add_text("Get in touch for a free initial consultation.", size=13, color=TEXT_COL, align='center', space_after=12)
+add_spacer(4)
+add_text("Get in touch for a free initial consultation.", size=12, color=TEXT_COL, align='center', space_after=10)
 
 # Founders signature block — two columns
 add_spacer(4)
