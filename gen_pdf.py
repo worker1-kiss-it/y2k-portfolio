@@ -9,7 +9,7 @@ BASE = r"C:\git\y2k-portfolio"
 OUT = os.path.join(BASE, "Y2K-AI-Portfolio.pdf")
 LOGO_W = os.path.join(BASE, "y2klogo.png")       # white
 LOGO_B = os.path.join(BASE, "y2klogoblack.png")  # black
-BANNER = os.path.join(BASE, "main-banner-bg2.jpg")
+BANNER = os.path.join(BASE, "bg1528x1080.png")
 W, H = landscape(A4)  # 842 x 595
 
 # Refined palette
@@ -262,16 +262,20 @@ def contact(c, pn):
     hl(c, cy, W/2-100, W/2+100)
     cy -= 24
     ct(c, cy, "Get in touch for a free initial consultation.", 12, TEXT)
-    # Signature block — centered, bigger
+    # Founders side by side
     sy = H/2 - 30
-    # Use white logo in signature too (black won't show on dark bg)
-    draw_logo(c, LOGO_W, 250, sy-5, 65, 32)
-    c.setStrokeColor(SUBTLE)
-    c.setLineWidth(0.8)
-    c.line(325, sy+16, 325, sy-12)
-    t(c, 338, sy+6, "Gergo Kiss, MSc", 13, TEXT, True)
-    t(c, 338, sy-8, "Managing Director · AI Systems Architect", 10, DIM)
-    t(c, 338, sy-22, "+43 1 442 20 143  ·  office@y2k.global  ·  www.y2k.global", 9, MUTED)
+    lx = 160
+    rx = W/2 + 40
+    # Gergo
+    t(c, lx, sy+6, "Gergo Kiss, MSc", 13, TEXT, True)
+    t(c, lx, sy-8, "Managing Director · AI Systems Architect", 10, DIM)
+    t(c, lx, sy-22, "g.kiss@y2k.global", 9, MUTED)
+    # Rami
+    t(c, rx, sy+6, "Ing. Ramazan Yildirim", 13, TEXT, True)
+    t(c, rx, sy-8, "Managing Director · AI Solutions Engineer", 10, DIM)
+    t(c, rx, sy-22, "r.yildirim@y2k.global", 9, MUTED)
+    sy -= 36
+    ct(c, sy, "+43 1 442 20 143  ·  office@y2k.global  ·  www.y2k.global", 9, MUTED)
     sy -= 44
     tl(c, sy, 250, W-250)
     sy -= 18
@@ -307,11 +311,11 @@ def main():
         ("Private AI Infrastructure",
          "Private AI Platform with Standard SDK Integration",
          "Organizations needed to deploy AI and large language model capabilities within their own infrastructure — without sending sensitive data to external cloud providers. Existing solutions required deep AI expertise and custom integration for each use case, creating a barrier to adoption across departments.",
-         "We built a private AI platform that runs entirely within the client’s infrastructure, providing an OpenAI-compatible API as a standard SDK interface. This means existing tools and applications can connect with zero code changes. The platform features intelligent multi-model routing for optimal cost and performance, a comprehensive admin dashboard for usage monitoring, and enterprise-grade access controls. Teams across the organization can leverage AI capabilities through familiar interfaces while keeping all data in-house.",
+         "We built a private AI platform that runs entirely within the client’s infrastructure, providing an OpenAI-compatible API as a standard SDK interface. This means existing tools and applications can connect with zero code changes. The platform features intelligent multi-model routing for optimal cost and performance, a comprehensive admin dashboard for usage monitoring, and production-grade access controls. Teams across the organization can leverage AI capabilities through familiar interfaces while keeping all data in-house.",
          ["Fully private deployment — no data leaves the organization", "OpenAI-compatible SDK for seamless integration", "Multi-model routing for cost/performance optimization", "Admin dashboard for monitoring and governance", "Zero-friction adoption across departments"],
          ["Python", "LLM Inference", "API Gateway", "Docker", "REST API", "Admin UI"]),
-        ("Enterprise System Optimization & AI",
-         "Fleet Information System — Performance & AI Enhancement",
+        ("System Optimization & AI",
+         "Fleet Management Platform — Performance & AI Enhancement",
          "A fleet management platform serving hundreds of locations and multiple operators suffered from critical performance bottlenecks. Key operational reports took over 14 seconds to load. Data type mismatches in the engineering pipeline caused intermittent system failures that eroded user trust.",
          "We performed a deep technical audit of the .NET/SQL Server stack, identified root causes in query design, database indexing, and ORM configuration. Applied surgical optimizations: replaced expensive SQL functions, added covering indexes, implemented NoTracking for read operations, and refreshed stale view metadata. Then extended the system with an AI companion featuring natural language fleet data querying and vision-based document processing with a ReAct agent architecture.",
          ["87% faster report generation (14.7s → 1.9s)", "Critical data pipeline errors resolved", "Natural language querying of fleet data", "Vision-based document processing", "ReAct agent with safety guardrails"],
