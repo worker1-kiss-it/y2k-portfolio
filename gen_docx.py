@@ -213,39 +213,16 @@ import docx.enum.text
 # PAGE 1: COVER
 # ════════════════════════════════════════
 
-# Try to add banner as background image in header
+# Banner as inline image in header (Word-compatible, no anchor hack)
 try:
     header = section.header
     header.is_linked_to_previous = False
     hp = header.paragraphs[0]
     hp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    hp.paragraph_format.space_before = Pt(0)
+    hp.paragraph_format.space_after = Pt(0)
     run = hp.add_run()
     run.add_picture(BANNER, width=Cm(29.7))
-    # Make it behave as background (behind doc)
-    inline = run._element.findall(qn('w:drawing'))[0]
-    inline_elem = inline.find(qn('wp:inline'))
-    if inline_elem is not None:
-        # Convert inline to anchor with behindDoc
-        anchor = copy.deepcopy(inline_elem)
-        anchor.tag = qn('wp:anchor')
-        anchor.set('behindDoc', '1')
-        anchor.set('locked', '0')
-        anchor.set('layoutInCell', '1')
-        anchor.set('allowOverlap', '1')
-        anchor.set('simplePos', '0')
-        anchor.set('relativeHeight', '0')
-        # Add position elements
-        posH = etree.SubElement(anchor, qn('wp:positionH'))
-        posH.set('relativeFrom', 'page')
-        posHoff = etree.SubElement(posH, qn('wp:align'))
-        posHoff.text = 'center'
-        posV = etree.SubElement(anchor, qn('wp:positionV'))
-        posV.set('relativeFrom', 'page')
-        posVoff = etree.SubElement(posV, qn('wp:align'))
-        posVoff.text = 'top'
-        # Remove extent and replace
-        inline.remove(inline_elem)
-        inline.append(anchor)
 except Exception as e:
     print(f"Banner note: {e}")
 
